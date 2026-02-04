@@ -6,11 +6,16 @@
 import 'frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-Future<Uint8List> cropPng({
+// These functions are ignored because they are not marked as `pub`: `apply_one`
+// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `EditOp`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `fmt`
+
+Future<Uint8List> applyOpsPng({
   required List<int> input,
-  required int x,
-  required int y,
-  required int w,
-  required int h,
-}) =>
-    RustLib.instance.api.crateApiCropPng(input: input, x: x, y: y, w: w, h: h);
+  required String opsJson,
+  int? maxWidth,
+}) => RustLib.instance.api.crateApiApplyOpsPng(
+  input: input,
+  opsJson: opsJson,
+  maxWidth: maxWidth,
+);
